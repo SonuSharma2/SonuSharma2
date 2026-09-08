@@ -6,11 +6,13 @@
   <a href="https://sonusharma.com.np">
     <img src="https://img.shields.io/badge/🌐_Live_Portfolio-sonusharma.com.np-E11D48?style=for-the-badge&logo=googlechrome&logoColor=white" />
   </a>
+  &nbsp;
   <a href="mailto:sonushar059@gmail.com">
     <img src="https://img.shields.io/badge/Email-sonushar059@gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
   </a>
-  <a href="tel:+9779860476428">
-    <img src="https://img.shields.io/badge/Phone-+977--9860476428-25D366?style=for-the-badge&logo=whatsapp&logoColor=white" />
+  &nbsp;
+  <a href="https://github.com/SonuSharma2">
+    <img src="https://img.shields.io/badge/GitHub-SonuSharma2-181717?style=for-the-badge&logo=github&logoColor=white" />
   </a>
 </div>
 
