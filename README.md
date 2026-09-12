@@ -1,10 +1,10 @@
 <div align="center">
   <!-- Sleek Dark Minimalist & Neon Cyberpunk Waving Header -->
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:#030712,35:#0f172a,70:#3b82f6,100:#8b5cf6&height=220&section=header&text=SONU%20SHARMA%20⚡&fontSize=40&fontAlignY=36&desc=QA%20ENGINEER%20%7C%20TEST%20AUTOMATION%20%7C%20SOFTWARE%20QUALITY&descAlignY=62&descAlign=50&fontColor=38bdf8" width="100%"/>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:#030712,35:#0f172a,70:#3b82f6,100:#8b5cf6&height=220&section=header&text=SONU%20SHARMA%20⚡&fontSize=40&fontAlignY=36&desc=FRONTEND%20ENGINEER%20%7C%20REACT%20%26%20TYPESCRIPT%20%7C%20UI%2FUX%20ANIMATIONS&descAlignY=62&descAlign=50&fontColor=38bdf8" width="100%"/>
 
   <!-- Typing SVG with Cyberpunk Glow -->
   <a href="https://sonusharma.com.np">
-    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2800&pause=900&color=38BDF8&center=true&vCenter=true&multiline=false&width=680&height=40&lines=Building+bulletproof+automation+frameworks.;Selenium+%E2%80%A2+Playwright+%E2%80%A2+Pytest+%E2%80%A2+Python;Eliminating+bugs+before+they+reach+production.;Explore+my+code+and+projects+below." alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=20&duration=2800&pause=900&color=38BDF8&center=true&vCenter=true&multiline=false&width=700&height=40&lines=Crafting+buttery-smooth+60fps+web+experiences.;React+%E2%80%A2+TypeScript+%E2%80%A2+TailwindCSS+%E2%80%A2+GSAP;Bridging+stunning+UI%2FUX+with+clean+code.;Ensuring+zero-regression+releases+with+test+automation." alt="Typing SVG" />
   </a>
 </div>
 
@@ -20,6 +20,8 @@
   <a href="https://github.com/SonuSharma2">
     <img src="https://img.shields.io/badge/🐙_GitHub-SonuSharma2-A855F7?style=for-the-badge&logo=github&logoColor=ffffff" />
   </a>
+  &nbsp;
+  <img src="https://komarev.com/ghpvc/?username=SonuSharma2&label=Profile%20Views&color=38bdf8&style=for-the-badge" alt="Profile Views" />
 </div>
 
 <br/>
@@ -29,22 +31,24 @@
 ```typescript
 interface DeveloperProfile {
   name: "Sonu Sharma";
-  role: "QA Engineer & Test Automation";
+  role: "Frontend Engineer & Creative Developer";
   education: "BSc (Hons) Computer Science @ Sunway International Business School";
   location: "Kathmandu, Nepal";
   coreFocus: [
-    "Modular Page Object Model (POM) Automation",
-    "End-to-End Web & Regression QA Testing",
-    "API Testing, Defect Lifecycle & Agile Delivery"
+    "Modern React & Next.js Scalable Architecture",
+    "Type-Safe Web Applications (TypeScript)",
+    "Interactive Experiences & Micro-Animations (GSAP, Framer Motion)",
+    "High-Performance, Accessible & Responsive UI"
   ];
-  currentMission: "Ensuring zero-defect releases with high-performance test suites";
+  superpower: "Strong QA & Automated Testing Foundation (Zero-Bug Mindset)";
+  currentObsession: "Building fluid micro-interactions and high-impact web apps";
 }
 ```
 
-- ⚡ **QA & Test Automation Engineer** passionate about building robust automated testing pipelines and ensuring exceptional software reliability.
-- 🧪 **Automation Frameworks**: Designing scalable test architectures with **Selenium WebDriver**, **Playwright**, **Pytest**, and **Python**.
-- 📡 **API & Integration Validation**: Postman automated collections, schema verification, and STLC defect lifecycle tracking in ClickUp.
-- 🚀 **Featured Platforms**: [Chatboq AI SaaS QA](https://chatboq.com/) & [SauceDemo Automated Test Suite](https://github.com/SonuSharma2/SauceDemo-Automation).
+- 🎨 **Frontend Engineer & Creative Developer** specializing in modern, high-performance web applications built with **React**, **TypeScript**, and **Tailwind CSS**.
+- ✨ **Interactive Motion & UI/UX**: Engineering immersive 60fps animations, spotlight masking, dynamic marquees, and responsive micro-interactions using **GSAP** and modern CSS.
+- 🛡️ **Zero-Regression Mindset**: Backed by strong experience in **QA & Test Automation** (**Playwright**, **Selenium**, **Pytest**), ensuring rock-solid stability and testability across web frontends.
+- 🚀 **Featured Platforms**: [Interactive Superhero Portfolio](https://sonusharma.com.np) & [SauceDemo E2E Test Suite](https://github.com/SonuSharma2/SauceDemo-Automation).
 
 ---
 
@@ -54,10 +58,10 @@ interface DeveloperProfile {
 
 | Domain | Technologies & Frameworks |
 | :--- | :--- |
-| **QA & Test Automation** | <img src="https://skillicons.dev/icons?i=selenium,python,postman" /> &nbsp; `Playwright` &nbsp; `Pytest` &nbsp; `Page Object Model (POM)` &nbsp; `STLC / SDLC` |
-| **Frontend & UI/UX** | <img src="https://skillicons.dev/icons?i=react,js,html,css,tailwind,vite" /> &nbsp; `GSAP Animations` |
-| **Programming Languages** | <img src="https://skillicons.dev/icons?i=py,js,c,java" /> |
-| **DevOps & Cloud Tools** | <img src="https://skillicons.dev/icons?i=git,github,githubactions,cloudflare,vscode" /> &nbsp; `ClickUp` |
+| **Frontend & Creative UI** | <img src="https://skillicons.dev/icons?i=react,ts,js,html,css,tailwind,vite,nextjs" /> |
+| **Motion & Design Systems** | <img src="https://skillicons.dev/icons?i=figma" /> &nbsp; `GSAP Animations` &nbsp; `Framer Motion` &nbsp; `Micro-Interactions` |
+| **Testing & Quality Assurance** | <img src="https://skillicons.dev/icons?i=selenium,python,postman" /> &nbsp; `Playwright` &nbsp; `Pytest` &nbsp; `Page Object Model (POM)` |
+| **DevOps, Tools & Cloud** | <img src="https://skillicons.dev/icons?i=git,github,githubactions,vscode,cloudflare,vercel,npm" /> |
 
 </div>
 
@@ -72,7 +76,19 @@ interface DeveloperProfile {
 </div>
 
 <div align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=SonuSharma2&theme=tokyonight&background=030712&border=38BDF8&stroke=818CF8&ring=38BDF8&fire=A855F7&currStreakNum=38BDF8&sideNums=E2E8F0&currStreakLabel=818CF8&sideLabels=94A3B8&dates=64748B&hide_border=false" height="150" alt="GitHub Streak" />
+  <img src="https://streak-stats.demolab.com/?user=SonuSharma2&theme=tokyonight&background=030712&border=38BDF8&stroke=818CF8&ring=38BDF8&fire=A855F7&currStreakNum=38BDF8&sideNums=E2E8F0&currStreakLabel=818CF8&sideLabels=94A3B8&dates=64748B&hide_border=false" height="150" alt="GitHub Streak" />
+</div>
+
+---
+
+### 🐍 Contribution Activity Snake
+
+<div align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/output/github-contribution-grid-snake-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/output/github-contribution-grid-snake.svg">
+    <img alt="Sonu's GitHub Contribution Grid Snake" src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/output/github-contribution-grid-snake-dark.svg" width="100%" />
+  </picture>
 </div>
 
 ---
