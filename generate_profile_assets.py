@@ -14,7 +14,11 @@ import math
 import random
 import io
 import requests
-from PIL import Image, ImageEnhance
+try:
+    from PIL import Image, ImageEnhance
+except ImportError:
+    Image = None
+    ImageEnhance = None
 
 GITHUB_USERNAME = "SonuSharma2"
 AVATAR_URL = f"https://avatars.githubusercontent.com/u/47955645?v=4"
@@ -239,7 +243,7 @@ def generate_terminal_card_svg():
     target_w = 42
     try:
         res = requests.get(AVATAR_URL, timeout=8)
-        if res.status_code == 200:
+        if res.status_code == 200 and Image is not None:
             img = Image.open(io.BytesIO(res.content)).convert("L")
             # Enhance contrast for sharp ASCII rendering
             img = ImageEnhance.Contrast(img).enhance(1.65)
