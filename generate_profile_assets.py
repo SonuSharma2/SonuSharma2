@@ -591,53 +591,57 @@ def generate_info_card_svg():
 # -------------------------------------------------------------------------
 def inject_into_readme():
     readme_path = os.path.join(OUTPUT_DIR, "README.md")
-    if not os.path.exists(readme_path):
-        print(f"Error: {readme_path} does not exist.")
-        return
+    clean_readme = """<div align="center">
+  <!-- Sleek Dark Minimalist & Neon Cyberpunk Waving Header -->
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:#030712,35:#0f172a,70:#3b82f6,100:#8b5cf6&height=210&section=header&text=SONU%20SHARMA%20⚡&fontSize=38&fontAlignY=36&desc=FRONTEND%20ENGINEER%20%7C%20REACT%20%26%20TYPESCRIPT%20%7C%20UI%2FUX%20ANIMATIONS&descAlignY=62&descAlign=50&fontColor=38bdf8" width="100%"/>
 
-    with open(readme_path, "r", encoding="utf-8") as f:
-        content = f.read()
+  <!-- Badges & Quick Links -->
+  <a href="https://sonusharma.com.np">
+    <img src="https://img.shields.io/badge/🌐_Portfolio-sonusharma.com.np-38BDF8?style=for-the-badge&logo=googlechrome&logoColor=030712" />
+  </a>
+  &nbsp;
+  <a href="mailto:sonushar059@gmail.com">
+    <img src="https://img.shields.io/badge/✉️_Email-sonushar059%40gmail.com-818CF8?style=for-the-badge&logo=gmail&logoColor=030712" />
+  </a>
+  &nbsp;
+  <a href="https://github.com/SonuSharma2">
+    <img src="https://img.shields.io/badge/🐙_GitHub-SonuSharma2-A855F7?style=for-the-badge&logo=github&logoColor=ffffff" />
+  </a>
+  &nbsp;
+  <img src="https://komarev.com/ghpvc/?username=SonuSharma2&label=Profile%20Views&color=38bdf8&style=for-the-badge" alt="Profile Views" />
+</div>
 
-    cards_block = """<!-- ======================================================== -->
+<br/>
+
+<!-- ======================================================== -->
 <!-- DYNAMIC CYBERPUNK TERMINAL & CONTRIBUTION SECTION -->
 <!-- ======================================================== -->
 <div align="center">
-  <table border="0" cellspacing="0" cellpadding="0" style="border: none; border-collapse: collapse; background: transparent;">
+  <table border="0" cellspacing="0" cellpadding="0" style="border: none; border-collapse: collapse; background: transparent; width: 100%;">
     <tr>
       <td width="50%" align="center" valign="top" style="border: none; padding: 6px;">
-        <img src="./terminal-card.svg" width="100%" alt="Sonu's ASCII Portrait Terminal" />
+        <img src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/main/terminal-card.svg" width="100%" alt="Sonu's ASCII Portrait Terminal" />
       </td>
       <td width="50%" align="center" valign="top" style="border: none; padding: 6px;">
-        <img src="./info-card.svg" width="100%" alt="Sonu's Neofetch System Info" />
+        <img src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/main/info-card.svg" width="100%" alt="Sonu's Neofetch System Info" />
       </td>
     </tr>
   </table>
   <br/>
-  <img src="./github-contribution-animation.svg" width="100%" alt="Sonu's GitHub Contribution Activity" />
+  <img src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/main/github-contribution-animation.svg" width="100%" alt="Sonu's GitHub Contribution Activity" />
 </div>
-<!-- ======================================================== -->"""
+<!-- ======================================================== -->
 
-    # Check if markers already exist
-    marker_start = "<!-- DYNAMIC CYBERPUNK TERMINAL & CONTRIBUTION SECTION -->"
-    if marker_start in content:
-        # Replace existing section
-        import re
-        content = re.sub(
-            r"<!-- ======================================================== -->\s*<!-- DYNAMIC CYBERPUNK TERMINAL & CONTRIBUTION SECTION -->.*?<!-- ======================================================== -->",
-            cards_block,
-            content,
-            flags=re.DOTALL
-        )
-    else:
-        # Inject right above "### 🛠️ Tech Stack & Tooling" or "### 🌌 About Me"
-        if "### 🛠️ Tech Stack & Tooling" in content:
-            content = content.replace("### 🛠️ Tech Stack & Tooling", f"{cards_block}\n\n---\n\n### 🛠️ Tech Stack & Tooling")
-        else:
-            content += f"\n\n{cards_block}"
+<br/>
 
+<div align="center">
+  <!-- Sleek Cyberpunk Gradient Footer -->
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:#8b5cf6,30:#3b82f6,70:#0f172a,100:#030712&height=90&section=footer" width="100%"/>
+</div>
+"""
     with open(readme_path, "w", encoding="utf-8") as f:
-        f.write(content)
-    print(f"Updated README.md with injected animated cards!")
+        f.write(clean_readme)
+    print("Updated README.md with pristine layout!")
 
 
 # -------------------------------------------------------------------------
