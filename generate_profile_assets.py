@@ -17,7 +17,7 @@ import io
 import requests
 
 try:
-    from PIL import Image, ImageEnhance
+    from PIL import Image, ImageEnhance  # type: ignore
 except ImportError:
     Image = None
     ImageEnhance = None
