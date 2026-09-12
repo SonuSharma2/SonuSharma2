@@ -115,5 +115,5 @@
 ---
 
 <div align="center">
-  <p><i>📍 Chabahil, Kathmandu, Nepal &nbsp;•&nbsp; ✉️ <a href="mailto:sonushar059@gmail.com">sonushar059@gmail.com</a> &nbsp;•&nbsp; 📞 +977-986-047-6428</i></p>
+  <p><i>📍 Kathmandu, Nepal &nbsp;•&nbsp; ✉️ <a href="mailto:sonushar059@gmail.com">sonushar059@gmail.com</a></i></p>
 </div>
