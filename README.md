@@ -11,13 +11,13 @@
 
 <!-- HERO SECTION -->
 <div align="center">
-  <h3><strong>Frontend Engineer | React &amp; TypeScript | UI/UX &amp; Motion Specialist</strong></h3>
-  <p><i>Building modern web applications, scalable architectures, and 60fps delightful micro-interactions.</i></p>
+  <h3><strong>QA &amp; Test Automation Engineer | Software Quality &amp; Web Applications</strong></h3>
+  <p><i>Building robust test automation frameworks with Selenium, Playwright &amp; Python | Ensuring zero-defect releases.</i></p>
 
   <p>
-    <a href="https://sonusharma.com.np"><img src="https://img.shields.io/badge/Portfolio-sonusharma.com.np-38BDF8?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
     <a href="mailto:sonushar059@gmail.com"><img src="https://img.shields.io/badge/Email-sonushar059%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
     <a href="https://github.com/SonuSharma2"><img src="https://img.shields.io/badge/GitHub-SonuSharma2-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+    <a href="https://github.com/SonuSharma2/SauceDemo-Automation"><img src="https://img.shields.io/badge/Project-SauceDemo--Automation-38BDF8?style=for-the-badge&logo=selenium&logoColor=white" alt="SauceDemo Automation" /></a>
   </p>
   
   <img src="https://komarev.com/ghpvc/?username=SonuSharma2&color=00FFCC&style=flat-square" alt="Visitor Counter" />

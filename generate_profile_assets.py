@@ -1,10 +1,11 @@
 """
 generate_profile_assets.py
 ==========================
-Generates the exact viral Cyberpunk animated GitHub profile setup:
-1. github-contribution-animation.svg (850x165): 53x7 calendar with diagonal wave sweep, specular glint flashes, and neon glow.
+Generates the exact viral Cyberpunk animated GitHub profile setup,
+customized 100% according to Sonu Sharma's official CV:
+1. github-contribution-animation.svg (850x165): 53x7 calendar with diagonal wave sweep, specular glints, and neon glow.
 2. terminal-card.svg (840x875): macOS terminal with circular ASCII portrait of Sonu, row-by-row reveal, sweeping cursor, and whoami footer.
-3. info-card.svg (480x460): Neofetch-style terminal info card with staggered slide-up lines, tech stack, and highlights.
+3. info-card.svg (480x460): Neofetch-style terminal info card reflecting Sonu's QA & Test Automation expertise, skills, tools, and highlights.
 4. Updates README.md to match the exact viral layout.
 """
 
@@ -36,8 +37,6 @@ def generate_contribution_svg():
     cols = 53
     rows = 7
 
-    # Palette
-    # Level 0 (empty), 1, 2, 3, 4
     colors = {
         0: "#161b22",
         1: "#0e4429",
@@ -85,12 +84,11 @@ def generate_contribution_svg():
 <text x="8" y="66" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">Wed</text>
 <text x="8" y="94" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">Fri</text>''')
 
-    # Grid start
     start_x = 34
     start_y = 28
     cell_pitch_x = 15
     cell_pitch_y = 14
-    max_d = (cols - 1) + (rows - 1)  # 58
+    max_d = (cols - 1) + (rows - 1)
 
     for c in range(cols):
         for r in range(rows):
@@ -116,7 +114,6 @@ def generate_contribution_svg():
                 svg.append(f'<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;{t1:.4f};{t2:.4f};1" dur="7.0s" repeatCount="indefinite"/>')
                 svg.append(f'<animate attributeName="fill" values="{color};{color};{flash};{color}" keyTimes="0;{t1:.4f};{t2:.4f};{t3:.4f}" dur="7.0s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.1 0 0.2 1;0.4 0 0.6 1"/>')
                 svg.append('</rect>')
-                # Specular white highlight
                 svg.append(f'<rect x="{x+2}" y="{y+2}" width="4" height="2" rx="1" fill="white" opacity="0" pointer-events="none">')
                 svg.append(f'<animate attributeName="opacity" values="0;0;0.55;0" keyTimes="0;{t1:.4f};{t2:.4f};{t3:.4f}" dur="7.0s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 0.3 1;0.5 0 1 1"/>')
                 svg.append('</rect>')
@@ -138,8 +135,6 @@ def generate_terminal_card_svg():
     H = 53
 
     ascii_rows = []
-
-    # Check for local avatar.png/avatar.jpg or fetch from GitHub
     local_avatar = None
     for cand in ["avatar.png", "avatar.jpg", "profile.jpg", "photo.jpg"]:
         cand_p = os.path.join(OUTPUT_DIR, cand)
@@ -183,7 +178,6 @@ def generate_terminal_card_svg():
     except Exception as e:
         print(f"Notice during image conversion: {e}")
 
-    # Fallback if image not processed
     if len(ascii_rows) < H:
         ascii_rows = []
         for y in range(H):
@@ -253,7 +247,7 @@ def generate_terminal_card_svg():
 
 
 # -------------------------------------------------------------------------
-# 3. GENERATE info-card.svg
+# 3. GENERATE info-card.svg (ACCORDING TO CV)
 # -------------------------------------------------------------------------
 def generate_info_card_svg():
     width = 480
@@ -293,7 +287,7 @@ def generate_info_card_svg():
 <!-- ── ROW 2: Role ── -->
 <g opacity="0" transform="translate(0,5)">
   <text x="20" y="104" fill="#ffa657" font-size="12.5" font-weight="700">Role</text>
-  <text x="112" y="104" fill="#c9d1d9" font-size="12.5">Frontend Engineer</text>
+  <text x="112" y="104" fill="#c9d1d9" font-size="12.5">QA &amp; Automation Engineer</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.27s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.27s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -301,7 +295,7 @@ def generate_info_card_svg():
 <!-- ── ROW 3: Focus ── -->
 <g opacity="0" transform="translate(0,5)">
   <text x="20" y="125" fill="#ffa657" font-size="12.5" font-weight="700">Focus</text>
-  <text x="112" y="125" fill="#c9d1d9" font-size="12.5">React, TypeScript &amp; UI/UX Motion</text>
+  <text x="112" y="125" fill="#c9d1d9" font-size="12.5">Selenium, Playwright, Pytest, POM</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.33s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.33s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -309,7 +303,7 @@ def generate_info_card_svg():
 <!-- ── ROW 4: College ── -->
 <g opacity="0" transform="translate(0,5)">
   <text x="20" y="146" fill="#ffa657" font-size="12.5" font-weight="700">College</text>
-  <text x="112" y="146" fill="#c9d1d9" font-size="12.5">BSc (Hons) CS, Sunway Int'l Business School</text>
+  <text x="112" y="146" fill="#c9d1d9" font-size="12.5">BSc (Hons) CS, Sunway (3.46 GPA)</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.39s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.39s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -322,42 +316,42 @@ def generate_info_card_svg():
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.51s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
 
-<!-- ── ROW: Frontend ── -->
+<!-- ── ROW: Automation ── -->
 <g opacity="0" transform="translate(0,5)">
-  <text x="20" y="198" fill="#ffa657" font-size="12.5" font-weight="700">Frontend</text>
-  <text x="112" y="198" fill="#c9d1d9" font-size="12.5">React, Next.js, TypeScript, Tailwind</text>
+  <text x="20" y="198" fill="#ffa657" font-size="12.5" font-weight="700">Automation</text>
+  <text x="112" y="198" fill="#c9d1d9" font-size="12.5">Selenium (Python), Playwright, Pytest</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.57s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.57s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
 
-<!-- ── ROW: Motion ── -->
+<!-- ── ROW: Testing ── -->
 <g opacity="0" transform="translate(0,5)">
-  <text x="20" y="219" fill="#ffa657" font-size="12.5" font-weight="700">Motion</text>
-  <text x="112" y="219" fill="#c9d1d9" font-size="12.5">GSAP Animations, Framer Motion</text>
+  <text x="20" y="219" fill="#ffa657" font-size="12.5" font-weight="700">Testing</text>
+  <text x="112" y="219" fill="#c9d1d9" font-size="12.5">Manual, Functional, API (Postman), JMeter</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.63s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.63s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
 
-<!-- ── ROW: Testing ── -->
+<!-- ── ROW: Tools ── -->
 <g opacity="0" transform="translate(0,5)">
-  <text x="20" y="240" fill="#ffa657" font-size="12.5" font-weight="700">Testing</text>
-  <text x="112" y="240" fill="#c9d1d9" font-size="12.5">Playwright, Pytest, Selenium (POM)</text>
+  <text x="20" y="240" fill="#ffa657" font-size="12.5" font-weight="700">Tools</text>
+  <text x="112" y="240" fill="#c9d1d9" font-size="12.5">ClickUp, Jira, Trello, Git, GitHub</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.69s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.69s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
 
-<!-- ── ROW: Cloud & Tools ── -->
+<!-- ── ROW: Languages ── -->
 <g opacity="0" transform="translate(0,5)">
-  <text x="20" y="261" fill="#ffa657" font-size="12.5" font-weight="700">Tools</text>
-  <text x="112" y="261" fill="#c9d1d9" font-size="12.5">Git, GitHub Actions, Vite, Vercel</text>
+  <text x="20" y="261" fill="#ffa657" font-size="12.5" font-weight="700">Languages</text>
+  <text x="112" y="261" fill="#c9d1d9" font-size="12.5">Python, C, HTML5, CSS3, MySQL</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.75s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.75s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
 
-<!-- ── ROW: Languages ── -->
+<!-- ── ROW: Process ── -->
 <g opacity="0" transform="translate(0,5)">
-  <text x="20" y="282" fill="#ffa657" font-size="12.5" font-weight="700">Languages</text>
-  <text x="112" y="282" fill="#c9d1d9" font-size="12.5">TypeScript, JavaScript, Python, C</text>
+  <text x="20" y="282" fill="#ffa657" font-size="12.5" font-weight="700">Process</text>
+  <text x="112" y="282" fill="#c9d1d9" font-size="12.5">SDLC, STLC, Agile (Scrum), POM</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.81s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.81s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -373,7 +367,7 @@ def generate_info_card_svg():
 <!-- ── BULLET 1 ── -->
 <g opacity="0" transform="translate(0,5)">
   <circle cx="23" cy="329" r="2.5" fill="#3fb950"/>
-  <text x="34" y="333" fill="#c9d1d9" font-size="12.5">Live Superhero Portfolio @ sonusharma.com.np</text>
+  <text x="34" y="333" fill="#c9d1d9" font-size="12.5">QA Automation on Chatboq.com SaaS AI Platform</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.93s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.93s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -381,7 +375,7 @@ def generate_info_card_svg():
 <!-- ── BULLET 2 ── -->
 <g opacity="0" transform="translate(0,5)">
   <circle cx="23" cy="354" r="2.5" fill="#3fb950"/>
-  <text x="34" y="358" fill="#c9d1d9" font-size="12.5">Engineered 60fps Spotlight Masking &amp; 3D Marquees</text>
+  <text x="34" y="358" fill="#c9d1d9" font-size="12.5">E2E Page Object Model Suites @ SauceDemo-Automation</text>
   <animate attributeName="opacity" from="0" to="1" begin="0.99s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.99s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -389,7 +383,7 @@ def generate_info_card_svg():
 <!-- ── BULLET 3 ── -->
 <g opacity="0" transform="translate(0,5)">
   <circle cx="23" cy="379" r="2.5" fill="#3fb950"/>
-  <text x="34" y="383" fill="#c9d1d9" font-size="12.5">Enterprise E2E Page Object Model Automation Suites</text>
+  <text x="34" y="383" fill="#c9d1d9" font-size="12.5">Web &amp; Mobile Functional/UI Testing @ Heal Home Care</text>
   <animate attributeName="opacity" from="0" to="1" begin="1.05s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="1.05s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -397,7 +391,7 @@ def generate_info_card_svg():
 <!-- ── BULLET 4 ── -->
 <g opacity="0" transform="translate(0,5)">
   <circle cx="23" cy="404" r="2.5" fill="#3fb950"/>
-  <text x="34" y="408" fill="#c9d1d9" font-size="12.5">5+ Years Building Robust, Zero-Regression Web Architectures</text>
+  <text x="34" y="408" fill="#c9d1d9" font-size="12.5">HackerRank Certified · Blockchain Project with 150+ Users</text>
   <animate attributeName="opacity" from="0" to="1" begin="1.11s" dur="0.4s" fill="freeze"/>
   <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="1.11s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
 </g>
@@ -410,7 +404,7 @@ def generate_info_card_svg():
 
 
 # -------------------------------------------------------------------------
-# 4. INJECT INTO README.md (EXACT VIRAL LAYOUT)
+# 4. INJECT INTO README.md (ACCORDING TO CV & VIRAL LAYOUT)
 # -------------------------------------------------------------------------
 def inject_into_readme():
     readme_path = os.path.join(OUTPUT_DIR, "README.md")
@@ -427,13 +421,13 @@ def inject_into_readme():
 
 <!-- HERO SECTION -->
 <div align="center">
-  <h3><strong>Frontend Engineer | React &amp; TypeScript | UI/UX &amp; Motion Specialist</strong></h3>
-  <p><i>Building modern web applications, scalable architectures, and 60fps delightful micro-interactions.</i></p>
+  <h3><strong>QA &amp; Test Automation Engineer | Software Quality &amp; Web Applications</strong></h3>
+  <p><i>Building robust test automation frameworks with Selenium, Playwright &amp; Python | Ensuring zero-defect releases.</i></p>
 
   <p>
-    <a href="https://sonusharma.com.np"><img src="https://img.shields.io/badge/Portfolio-sonusharma.com.np-38BDF8?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
     <a href="mailto:sonushar059@gmail.com"><img src="https://img.shields.io/badge/Email-sonushar059%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
     <a href="https://github.com/{GITHUB_USERNAME}"><img src="https://img.shields.io/badge/GitHub-{GITHUB_USERNAME}-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+    <a href="https://github.com/{GITHUB_USERNAME}/SauceDemo-Automation"><img src="https://img.shields.io/badge/Project-SauceDemo--Automation-38BDF8?style=for-the-badge&logo=selenium&logoColor=white" alt="SauceDemo Automation" /></a>
   </p>
   
   <img src="https://komarev.com/ghpvc/?username={GITHUB_USERNAME}&color=00FFCC&style=flat-square" alt="Visitor Counter" />
@@ -441,7 +435,7 @@ def inject_into_readme():
 '''
     with open(readme_path, "w", encoding="utf-8") as f:
         f.write(content)
-    print("Updated README.md with exact viral layout!")
+    print("Updated README.md with exact viral layout matching CV!")
 
 
 # -------------------------------------------------------------------------
@@ -452,4 +446,4 @@ if __name__ == "__main__":
     generate_terminal_card_svg()
     generate_info_card_svg()
     inject_into_readme()
-    print("All tasks completed successfully!")
+    print("All tasks completed successfully according to CV!")
