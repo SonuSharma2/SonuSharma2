@@ -1,0 +1,507 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 890 205" width="100%" height="205">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="contrib-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117" />
+      <stop offset="50%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#090d16" />
+    </linearGradient>
+
+    <!-- Outer Glow for Level 3 & Level 4 Cells -->
+    <filter id="glow-l3" x="-80%" y="-80%" width="260%" height="260%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#26a641" flood-opacity="0.75" />
+    </filter>
+    <filter id="glow-l4" x="-100%" y="-100%" width="300%" height="300%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#39d353" flood-opacity="0.95" />
+      <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#5eead4" flood-opacity="0.8" />
+    </filter>
+
+    <style>
+      .bg-card {
+        fill: url(#contrib-bg);
+        stroke: #30363d;
+        stroke-width: 1.2;
+        rx: 12px;
+      }
+      .title-text {
+        font-family: 'JetBrains Mono', 'Fira Code', -apple-system, BlinkMacSystemFont, monospace;
+        font-size: 13px;
+        font-weight: 600;
+        fill: #f1f5f9;
+        letter-spacing: 0.5px;
+      }
+      .stat-counter {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 11px;
+        fill: #38bdf8;
+        font-weight: 500;
+      }
+      .axis-label {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 9px;
+        fill: #64748b;
+      }
+      .legend-text {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 10px;
+        fill: #8b949e;
+      }
+
+      /* Base cell transformation */
+      .c-cell {
+        transform-box: fill-box;
+        transform-origin: center;
+        opacity: 0;
+      }
+
+      /* Diagonal Slant Reveal with Specular White/Cyan Glint Flash */
+      @keyframes slantRevealL0 {
+        0% { opacity: 0; transform: scale(0.2); fill: #ffffff; }
+        30% { opacity: 1; transform: scale(1.25); fill: #ffffff; }
+        65% { fill: #334155; }
+        100% { opacity: 1; transform: scale(1); fill: #161b22; }
+      }
+      @keyframes slantRevealL1 {
+        0% { opacity: 0; transform: scale(0.2); fill: #ffffff; }
+        30% { opacity: 1; transform: scale(1.3); fill: #ffffff; }
+        65% { fill: #2dd4bf; }
+        100% { opacity: 1; transform: scale(1); fill: #0e4429; }
+      }
+      @keyframes slantRevealL2 {
+        0% { opacity: 0; transform: scale(0.2); fill: #ffffff; }
+        30% { opacity: 1; transform: scale(1.35); fill: #ffffff; }
+        65% { fill: #38bdf8; }
+        100% { opacity: 1; transform: scale(1); fill: #006d32; }
+      }
+      @keyframes slantRevealL3 {
+        0% { opacity: 0; transform: scale(0.2); fill: #ffffff; }
+        30% { opacity: 1; transform: scale(1.4); fill: #ffffff; }
+        65% { fill: #86efac; }
+        100% { opacity: 1; transform: scale(1); fill: #26a641; }
+      }
+      @keyframes slantRevealL4 {
+        0% { opacity: 0; transform: scale(0.2); fill: #ffffff; }
+        30% { opacity: 1; transform: scale(1.5); fill: #ffffff; }
+        65% { fill: #a7f3d0; }
+        100% { opacity: 1; transform: scale(1); fill: #39d353; }
+      }
+    </style>
+  </defs>
+
+  <!-- Card Background -->
+  <rect width="890" height="205" class="bg-card" />
+
+  <!-- Header Section -->
+  <g transform="translate(24, 28)">
+    <circle cx="4" cy="-2" r="3" fill="#22c55e">
+      <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+    </circle>
+    <text x="16" y="2" class="title-text">⚡ GitHub Contribution Activity (Live Simulation)</text>
+    <text x="842" y="2" text-anchor="end" class="stat-counter">1,480+ Commits &amp; Reviews in Last Year</text>
+  </g>
+
+  <!-- Month Labels -->
+  <g class="axis-label" transform="translate(55, 44)">
+    <text x="0">Jan</text>
+    <text x="64">Feb</text>
+    <text x="128">Mar</text>
+    <text x="192">Apr</text>
+    <text x="256">May</text>
+    <text x="320">Jun</text>
+    <text x="384">Jul</text>
+    <text x="448">Aug</text>
+    <text x="512">Sep</text>
+    <text x="576">Oct</text>
+    <text x="640">Nov</text>
+    <text x="704">Dec</text>
+  </g>
+  <g class="axis-label" transform="translate(26, 64)">
+    <text x="0" y="14.5">Mon</text>
+    <text x="0" y="43.5">Wed</text>
+    <text x="0" y="72.5">Fri</text>
+  </g>
+  <!-- Contribution Grid Cells -->
+  <g>
+    <rect class="c-cell" x="55.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="55.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;" />
+    <rect class="c-cell" x="55.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.232s forwards;" />
+    <rect class="c-cell" x="55.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.204s forwards;" />
+    <rect class="c-cell" x="55.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.176s forwards;" />
+    <rect class="c-cell" x="55.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.148s forwards;" />
+    <rect class="c-cell" x="55.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;" />
+    <rect class="c-cell" x="69.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="69.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="69.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;" />
+    <rect class="c-cell" x="69.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.232s forwards;" />
+    <rect class="c-cell" x="69.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.204s forwards;" />
+    <rect class="c-cell" x="69.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.176s forwards;" />
+    <rect class="c-cell" x="69.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.148s forwards;" />
+    <rect class="c-cell" x="84.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="84.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="84.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="84.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;" />
+    <rect class="c-cell" x="84.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.232s forwards;" />
+    <rect class="c-cell" x="84.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.204s forwards;" />
+    <rect class="c-cell" x="84.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.176s forwards;" />
+    <rect class="c-cell" x="98.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="98.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="98.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="98.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="98.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;" />
+    <rect class="c-cell" x="98.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.232s forwards;" />
+    <rect class="c-cell" x="98.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.204s forwards;" />
+    <rect class="c-cell" x="113.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="113.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="113.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="113.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="113.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="113.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;" />
+    <rect class="c-cell" x="113.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.232s forwards;" />
+    <rect class="c-cell" x="127.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="127.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="127.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="127.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="127.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="127.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="127.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;" />
+    <rect class="c-cell" x="142.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="142.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="142.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="142.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="142.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="142.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="142.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.288s forwards;" />
+    <rect class="c-cell" x="156.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="156.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="156.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="156.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="156.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="156.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="156.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.316s forwards;" />
+    <rect class="c-cell" x="171.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="171.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="171.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="171.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="171.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="171.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="171.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.344s forwards;" />
+    <rect class="c-cell" x="185.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="185.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="185.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="185.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="185.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="185.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="185.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.372s forwards;" />
+    <rect class="c-cell" x="200.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="200.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="200.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="200.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="200.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="200.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="200.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;" />
+    <rect class="c-cell" x="214.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="214.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="214.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="214.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="214.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="214.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="214.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.428s forwards;" />
+    <rect class="c-cell" x="229.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="229.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="229.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="229.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="229.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="229.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="229.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.456s forwards;" />
+    <rect class="c-cell" x="243.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="243.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="243.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="243.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="243.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="243.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="243.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.484s forwards;" />
+    <rect class="c-cell" x="258.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="258.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="258.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="258.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="258.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="258.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="258.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.512s forwards;" />
+    <rect class="c-cell" x="272.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="272.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="272.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="272.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="272.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="272.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="272.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.54s forwards;" />
+    <rect class="c-cell" x="287.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="287.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="287.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="287.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="287.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="287.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="287.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.568s forwards;" />
+    <rect class="c-cell" x="301.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="301.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="301.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="301.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="301.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="301.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="301.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.596s forwards;" />
+    <rect class="c-cell" x="316.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="316.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="316.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="316.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="316.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="316.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="316.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.624s forwards;" />
+    <rect class="c-cell" x="330.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="330.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="330.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="330.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="330.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="330.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="330.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.652s forwards;" />
+    <rect class="c-cell" x="345.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="345.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="345.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="345.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="345.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="345.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="345.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.68s forwards;" />
+    <rect class="c-cell" x="359.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="359.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="359.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="359.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="359.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="359.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="359.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.708s forwards;" />
+    <rect class="c-cell" x="374.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="374.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="374.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="374.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="374.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="374.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="374.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.736s forwards;" />
+    <rect class="c-cell" x="388.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="388.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="388.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="388.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="388.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="388.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="388.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.764s forwards;" />
+    <rect class="c-cell" x="403.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="403.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="403.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="403.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="403.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="403.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="403.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.792s forwards;" />
+    <rect class="c-cell" x="417.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="417.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="417.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="417.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="417.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="417.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="417.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.82s forwards;" />
+    <rect class="c-cell" x="432.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="432.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="432.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="432.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="432.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="432.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="432.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.848s forwards;" />
+    <rect class="c-cell" x="446.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="446.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="446.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="446.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="446.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="446.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="446.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.876s forwards;" />
+    <rect class="c-cell" x="461.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="461.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="461.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="461.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="461.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="461.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="461.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.904s forwards;" />
+    <rect class="c-cell" x="475.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="475.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="475.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="475.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="475.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="475.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="475.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.932s forwards;" />
+    <rect class="c-cell" x="490.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="490.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="490.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="490.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="490.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="490.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="490.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.96s forwards;" />
+    <rect class="c-cell" x="504.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="504.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="504.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="504.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="504.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="504.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="504.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.988s forwards;" />
+    <rect class="c-cell" x="519.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="519.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="519.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="519.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="519.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="519.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="519.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.016s forwards;" />
+    <rect class="c-cell" x="533.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="533.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="533.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="533.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="533.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="533.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="533.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.044s forwards;" />
+    <rect class="c-cell" x="548.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="548.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="548.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="548.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="548.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="548.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="548.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.072s forwards;" />
+    <rect class="c-cell" x="562.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="562.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="562.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="562.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="562.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="562.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="562.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.1s forwards;" />
+    <rect class="c-cell" x="577.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="577.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="577.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="577.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="577.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="577.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="577.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.128s forwards;" />
+    <rect class="c-cell" x="591.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="591.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="591.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="591.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="591.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="591.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="591.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.156s forwards;" />
+    <rect class="c-cell" x="606.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="606.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="606.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="606.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="606.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="606.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="606.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.184s forwards;" />
+    <rect class="c-cell" x="620.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="620.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="620.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="620.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="620.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="620.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="620.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.212s forwards;" />
+    <rect class="c-cell" x="635.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="635.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="635.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="635.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="635.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="635.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="635.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.24s forwards;" />
+    <rect class="c-cell" x="649.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="649.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="649.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="649.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="649.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="649.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="649.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.268s forwards;" />
+    <rect class="c-cell" x="664.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="664.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="664.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="664.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="664.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="664.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="664.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.296s forwards;" />
+    <rect class="c-cell" x="678.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="678.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="678.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="678.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="678.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="678.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="678.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.324s forwards;" />
+    <rect class="c-cell" x="693.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="693.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="693.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="693.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="693.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="693.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="693.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.352s forwards;" />
+    <rect class="c-cell" x="707.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="707.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="707.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="707.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="707.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="707.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="707.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.38s forwards;" />
+    <rect class="c-cell" x="722.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+    <rect class="c-cell" x="722.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="722.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="722.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="722.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="722.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="722.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.408s forwards;" />
+    <rect class="c-cell" x="736.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.604s forwards;" />
+    <rect class="c-cell" x="736.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+    <rect class="c-cell" x="736.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="736.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="736.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="736.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="736.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.436s forwards;" />
+    <rect class="c-cell" x="751.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.632s forwards;" />
+    <rect class="c-cell" x="751.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.604s forwards;" />
+    <rect class="c-cell" x="751.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+    <rect class="c-cell" x="751.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="751.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="751.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="751.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.464s forwards;" />
+    <rect class="c-cell" x="765.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.66s forwards;" />
+    <rect class="c-cell" x="765.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.632s forwards;" />
+    <rect class="c-cell" x="765.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.604s forwards;" />
+    <rect class="c-cell" x="765.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+    <rect class="c-cell" x="765.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="765.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="765.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.492s forwards;" />
+    <rect class="c-cell" x="780.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.688s forwards;" />
+    <rect class="c-cell" x="780.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.66s forwards;" />
+    <rect class="c-cell" x="780.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.632s forwards;" />
+    <rect class="c-cell" x="780.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.604s forwards;" />
+    <rect class="c-cell" x="780.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+    <rect class="c-cell" x="780.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="780.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l4)" style="animation: slantRevealL4 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.52s forwards;" />
+    <rect class="c-cell" x="794.5" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.716s forwards;" />
+    <rect class="c-cell" x="794.5" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.688s forwards;" />
+    <rect class="c-cell" x="794.5" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.66s forwards;" />
+    <rect class="c-cell" x="794.5" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.632s forwards;" />
+    <rect class="c-cell" x="794.5" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.604s forwards;" />
+    <rect class="c-cell" x="794.5" y="128.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+    <rect class="c-cell" x="794.5" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.548s forwards;" />
+    <rect class="c-cell" x="809.0" y="56.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.744s forwards;" />
+    <rect class="c-cell" x="809.0" y="70.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.716s forwards;" />
+    <rect class="c-cell" x="809.0" y="85.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.688s forwards;" />
+    <rect class="c-cell" x="809.0" y="99.5" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL2 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.66s forwards;" />
+    <rect class="c-cell" x="809.0" y="114.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL0 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.632s forwards;" />
+    <rect class="c-cell" x="809.0" y="128.5" width="11" height="11" rx="2.5" ry="2.5" filter="url(#glow-l3)" style="animation: slantRevealL3 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.604s forwards;" />
+    <rect class="c-cell" x="809.0" y="143.0" width="11" height="11" rx="2.5" ry="2.5"  style="animation: slantRevealL1 0.55s cubic-bezier(0.16, 1, 0.3, 1) 1.576s forwards;" />
+  </g>
+  <!-- Legend Section -->
+  <g class="legend-text" transform="translate(710, 185)">
+    <text x="-8" y="8" text-anchor="end">Less</text>
+    <rect x="0" y="0" width="9" height="9" rx="1.5" fill="#161b22" stroke="#30363d" stroke-width="0.5" />
+    <rect x="13" y="0" width="9" height="9" rx="1.5" fill="#0e4429" />
+    <rect x="26" y="0" width="9" height="9" rx="1.5" fill="#006d32" />
+    <rect x="39" y="0" width="9" height="9" rx="1.5" fill="#26a641" filter="url(#glow-l3)" />
+    <rect x="52" y="0" width="9" height="9" rx="1.5" fill="#39d353" filter="url(#glow-l4)" />
+    <text x="68" y="8">More</text>
+  </g>
+</svg>

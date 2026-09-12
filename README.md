@@ -52,6 +52,27 @@ interface DeveloperProfile {
 
 ---
 
+<!-- ======================================================== -->
+<!-- DYNAMIC CYBERPUNK TERMINAL & CONTRIBUTION SECTION -->
+<!-- ======================================================== -->
+<div align="center">
+  <table border="0" cellspacing="0" cellpadding="0" style="border: none; border-collapse: collapse; background: transparent;">
+    <tr>
+      <td width="50%" align="center" valign="top" style="border: none; padding: 6px;">
+        <img src="./terminal-card.svg" width="100%" alt="Sonu's ASCII Portrait Terminal" />
+      </td>
+      <td width="50%" align="center" valign="top" style="border: none; padding: 6px;">
+        <img src="./info-card.svg" width="100%" alt="Sonu's Neofetch System Info" />
+      </td>
+    </tr>
+  </table>
+  <br/>
+  <img src="./github-contribution-animation.svg" width="100%" alt="Sonu's GitHub Contribution Activity" />
+</div>
+<!-- ======================================================== -->
+
+---
+
 ### 🛠️ Tech Stack & Tooling
 
 <div align="center">

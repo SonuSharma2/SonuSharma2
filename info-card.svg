@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 420" width="100%" height="420">
+  <defs>
+    <!-- Card Gradient -->
+    <linearGradient id="info-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117" />
+      <stop offset="60%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0a0f1d" />
+    </linearGradient>
+
+    <style>
+      .info-window {
+        fill: url(#info-bg);
+        stroke: #30363d;
+        stroke-width: 1.2;
+        rx: 12px;
+      }
+      .info-title {
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 11px;
+        fill: #8b949e;
+        font-weight: 500;
+      }
+      .term-line {
+        font-family: 'JetBrains Mono', 'Fira Code', -apple-system, monospace;
+        font-size: 11.5px;
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      /* Staggered slide up and fade in for terminal neofetch lines */
+      @keyframes slideInLine {
+        0% {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .color-block {
+        opacity: 0;
+        transform: scale(0.8);
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      @keyframes popColorBlock {
+        0% { opacity: 0; transform: scale(0.6); }
+        100% { opacity: 1; transform: scale(1); }
+      }
+    </style>
+  </defs>
+
+  <!-- Window Container -->
+  <rect width="440" height="420" class="info-window" />
+
+  <!-- macOS Window Control Buttons -->
+  <circle cx="22" cy="19" r="5.5" fill="#ef4444" />
+  <circle cx="38" cy="19" r="5.5" fill="#f59e0b" />
+  <circle cx="54" cy="19" r="5.5" fill="#10b981" />
+
+  <!-- Window Title -->
+  <text x="220" y="23" text-anchor="middle" class="info-title">sonu@system: ~ (neofetch)</text>
+
+  <!-- Divider Line -->
+  <line x1="0" y1="36" x2="440" y2="36" stroke="#21262d" stroke-width="1" />
+
+  <!-- Content Rows -->
+  <g transform="translate(24, 60)">
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;" transform="translate(0, 0)">
+      <text font-weight="700" font-size="13" fill="#38bdf8">sonu@devbox</text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.21s forwards;" transform="translate(0, 16)">
+      <text fill="#475569">--------------------------------------</text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.27s forwards;" transform="translate(0, 36)">
+      <text>
+        <tspan fill="#f97316" font-weight="600">OS: </tspan>
+        <tspan fill="#e2e8f0">GitHub / Arch Linux (Rolling)</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.33s forwards;" transform="translate(0, 57)">
+      <text>
+        <tspan fill="#f97316" font-weight="600">Host: </tspan>
+        <tspan fill="#e2e8f0">Sunway CS / Kathmandu, NP</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.39s forwards;" transform="translate(0, 78)">
+      <text>
+        <tspan fill="#38bdf8" font-weight="600">Kernel: </tspan>
+        <tspan fill="#e2e8f0">React 19 / TypeScript 5.8 (Strict)</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.45s forwards;" transform="translate(0, 99)">
+      <text>
+        <tspan fill="#22c55e" font-weight="600">Role: </tspan>
+        <tspan fill="#f1f5f9">Frontend Engineer & Creative Dev</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.51s forwards;" transform="translate(0, 120)">
+      <text>
+        <tspan fill="#a855f7" font-weight="600">Uptime: </tspan>
+        <tspan fill="#e2e8f0">5+ Years in Software Engineering</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.57s forwards;" transform="translate(0, 141)">
+      <text>
+        <tspan fill="#f97316" font-weight="600">Shell: </tspan>
+        <tspan fill="#e2e8f0">zsh 5.9 (spaceship-prompt & starship)</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.63s forwards;" transform="translate(0, 162)">
+      <text>
+        <tspan fill="#38bdf8" font-weight="600">Stack: </tspan>
+        <tspan fill="#38bdf8">React • TypeScript • Tailwind • GSAP</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.69s forwards;" transform="translate(0, 183)">
+      <text>
+        <tspan fill="#22c55e" font-weight="600">Quality: </tspan>
+        <tspan fill="#4ade80">Playwright • Pytest • Selenium (POM)</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;" transform="translate(0, 204)">
+      <text>
+        <tspan fill="#a855f7" font-weight="600">Mission: </tspan>
+        <tspan fill="#c084fc">"Zero Bugs, 60fps, Pure Delight"</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.81s forwards;" transform="translate(0, 225)">
+      <text>
+        <tspan fill="#f97316" font-weight="600">Memory: </tspan>
+        <tspan fill="#e2e8f0">99.4% Caffeine / 0.6% Sleep</tspan>
+      </text>
+    </g>
+    <g class="term-line" style="animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) 0.87s forwards;" transform="translate(0, 246)">
+      <text>
+        <tspan fill="#38bdf8" font-weight="600">Portfolio: </tspan>
+        <tspan fill="#38bdf8">https://sonusharma.com.np</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Neofetch Color Test Bars -->
+  <g transform="translate(24, 350)">
+    <rect class="color-block" x="0" y="0" width="21" height="11" rx="2" fill="#1e293b" style="animation: popColorBlock 0.25s ease-out 1.03s forwards;" />
+    <rect class="color-block" x="26" y="0" width="21" height="11" rx="2" fill="#ef4444" style="animation: popColorBlock 0.25s ease-out 1.06s forwards;" />
+    <rect class="color-block" x="52" y="0" width="21" height="11" rx="2" fill="#22c55e" style="animation: popColorBlock 0.25s ease-out 1.09s forwards;" />
+    <rect class="color-block" x="78" y="0" width="21" height="11" rx="2" fill="#eab308" style="animation: popColorBlock 0.25s ease-out 1.12s forwards;" />
+    <rect class="color-block" x="104" y="0" width="21" height="11" rx="2" fill="#3b82f6" style="animation: popColorBlock 0.25s ease-out 1.15s forwards;" />
+    <rect class="color-block" x="130" y="0" width="21" height="11" rx="2" fill="#a855f7" style="animation: popColorBlock 0.25s ease-out 1.18s forwards;" />
+    <rect class="color-block" x="156" y="0" width="21" height="11" rx="2" fill="#06b6d4" style="animation: popColorBlock 0.25s ease-out 1.21s forwards;" />
+    <rect class="color-block" x="182" y="0" width="21" height="11" rx="2" fill="#f8fafc" style="animation: popColorBlock 0.25s ease-out 1.24s forwards;" />
+    <rect class="color-block" x="0" y="15" width="21" height="11" rx="2" fill="#475569" style="animation: popColorBlock 0.25s ease-out 1.23s forwards;" />
+    <rect class="color-block" x="26" y="15" width="21" height="11" rx="2" fill="#f87171" style="animation: popColorBlock 0.25s ease-out 1.26s forwards;" />
+    <rect class="color-block" x="52" y="15" width="21" height="11" rx="2" fill="#4ade80" style="animation: popColorBlock 0.25s ease-out 1.29s forwards;" />
+    <rect class="color-block" x="78" y="15" width="21" height="11" rx="2" fill="#fde047" style="animation: popColorBlock 0.25s ease-out 1.32s forwards;" />
+    <rect class="color-block" x="104" y="15" width="21" height="11" rx="2" fill="#60a5fa" style="animation: popColorBlock 0.25s ease-out 1.35s forwards;" />
+    <rect class="color-block" x="130" y="15" width="21" height="11" rx="2" fill="#c084fc" style="animation: popColorBlock 0.25s ease-out 1.38s forwards;" />
+    <rect class="color-block" x="156" y="15" width="21" height="11" rx="2" fill="#22d3ee" style="animation: popColorBlock 0.25s ease-out 1.41s forwards;" />
+    <rect class="color-block" x="182" y="15" width="21" height="11" rx="2" fill="#ffffff" style="animation: popColorBlock 0.25s ease-out 1.44s forwards;" />
+  </g>
+</svg>
