@@ -1,11 +1,11 @@
 """
 generate_profile_assets.py
 ==========================
-Generates three high-end, self-contained animated SVGs for GitHub Profile README:
-1. github-contribution-animation.svg: 53x7 grid with diagonal slant reveal, specular glint, and level 3+ outer glow.
-2. terminal-card.svg: macOS terminal with ASCII portrait converted from GitHub avatar, animated row-by-row, with $ whoami typewriter footer.
-3. info-card.svg: Neofetch-style system info card with staggered slide-in animations and terminal color blocks.
-4. Updates README.md to seamlessly embed them side-by-side and centered.
+Generates the exact viral Cyberpunk animated GitHub profile setup:
+1. github-contribution-animation.svg (850x165): 53x7 calendar with diagonal wave sweep, specular glint flashes, and neon glow.
+2. terminal-card.svg (840x875): macOS terminal with circular ASCII portrait of Sonu, row-by-row reveal, sweeping cursor, and whoami footer.
+3. info-card.svg (480x460): Neofetch-style terminal info card with staggered slide-up lines, tech stack, and highlights.
+4. Updates README.md to match the exact viral layout.
 """
 
 import os
@@ -14,6 +14,7 @@ import math
 import random
 import io
 import requests
+
 try:
     from PIL import Image, ImageEnhance
 except ImportError:
@@ -21,24 +22,22 @@ except ImportError:
     ImageEnhance = None
 
 GITHUB_USERNAME = "SonuSharma2"
-AVATAR_URL = f"https://avatars.githubusercontent.com/u/47955645?v=4"
+FULL_NAME = "Sonu Sharma"
+AVATAR_URL = "https://avatars.githubusercontent.com/u/47955645?v=4"
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 # -------------------------------------------------------------------------
 # 1. GENERATE github-contribution-animation.svg
 # -------------------------------------------------------------------------
 def generate_contribution_svg():
-    width = 890
-    height = 205
+    width = 850
+    height = 165
     cols = 53
     rows = 7
-    cell_size = 11
-    cell_pitch = 14.5
-    start_x = 55
-    start_y = 56
 
-    # Contribution color palette
-    # Level 0 (empty), 1 (low), 2 (medium), 3 (high), 4 (peak)
+    # Palette
+    # Level 0 (empty), 1, 2, 3, 4
     colors = {
         0: "#161b22",
         1: "#0e4429",
@@ -46,188 +45,86 @@ def generate_contribution_svg():
         3: "#26a641",
         4: "#39d353"
     }
+    flash_colors = {
+        0: "#30363d",
+        1: "#57ffb0",
+        2: "#57ffb0",
+        3: "#8dffcc",
+        4: "#b5ffd9"
+    }
 
-    # Generate realistic pseudo-random contributions clustered into active periods
-    random.seed(42)
-    weights = [0.42, 0.24, 0.18, 0.11, 0.05]
-    grid_levels = []
+    random.seed(1337)
+    weights = [0.42, 0.22, 0.18, 0.12, 0.06]
+    grid = []
     for c in range(cols):
-        col_levels = []
-        for r in range(rows):
-            lvl = random.choices([0, 1, 2, 3, 4], weights=weights)[0]
-            col_levels.append(lvl)
-        grid_levels.append(col_levels)
+        col_lvls = [random.choices([0, 1, 2, 3, 4], weights=weights)[0] for _ in range(rows)]
+        grid.append(col_lvls)
 
-    # Calculate diagonal delays for "slant reveal"
-    # Diagonal index: d = col + (6 - row)
-    # Sweeps from bottom-left (col=0, row=6 => d=0) to top-right (col=52, row=0 => d=58)
+    svg = []
+    svg.append(f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
+<defs>
+<filter id="cellglow" x="-70%" y="-70%" width="240%" height="240%">
+  <feGaussianBlur stdDeviation="2" result="blur"/>
+  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+</filter>
+</defs>
+<rect width="{width}" height="{height}" rx="16" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+<text x="34" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Jan</text>
+<text x="90" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Feb</text>
+<text x="160" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Mar</text>
+<text x="216" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Apr</text>
+<text x="286" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">May</text>
+<text x="342" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Jun</text>
+<text x="398" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Jul</text>
+<text x="468" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Aug</text>
+<text x="524" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Sep</text>
+<text x="594" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Oct</text>
+<text x="650" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Nov</text>
+<text x="720" y="18" fill="#8b949e" font-size="10" font-family="system-ui,sans-serif">Dec</text>
+<text x="8" y="38" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">Mon</text>
+<text x="8" y="66" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">Wed</text>
+<text x="8" y="94" fill="#8b949e" font-size="9" font-family="system-ui,sans-serif">Fri</text>''')
+
+    # Grid start
+    start_x = 34
+    start_y = 28
+    cell_pitch_x = 15
+    cell_pitch_y = 14
     max_d = (cols - 1) + (rows - 1)  # 58
 
-    svg_parts = []
-    svg_parts.append(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="100%" height="{height}">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="contrib-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d1117" />
-      <stop offset="50%" stop-color="#0f172a" />
-      <stop offset="100%" stop-color="#090d16" />
-    </linearGradient>
-
-    <!-- Outer Glow for Level 3 & Level 4 Cells -->
-    <filter id="glow-l3" x="-80%" y="-80%" width="260%" height="260%">
-      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#26a641" flood-opacity="0.75" />
-    </filter>
-    <filter id="glow-l4" x="-100%" y="-100%" width="300%" height="300%">
-      <feDropShadow dx="0" dy="0" stdDeviation="3.5" flood-color="#39d353" flood-opacity="0.95" />
-      <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#5eead4" flood-opacity="0.8" />
-    </filter>
-
-    <style>
-      .bg-card {{
-        fill: url(#contrib-bg);
-        stroke: #30363d;
-        stroke-width: 1.2;
-        rx: 12px;
-      }}
-      .title-text {{
-        font-family: 'JetBrains Mono', 'Fira Code', -apple-system, BlinkMacSystemFont, monospace;
-        font-size: 13px;
-        font-weight: 600;
-        fill: #f1f5f9;
-        letter-spacing: 0.5px;
-      }}
-      .stat-counter {{
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 11px;
-        fill: #38bdf8;
-        font-weight: 500;
-      }}
-      .axis-label {{
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 9px;
-        fill: #64748b;
-      }}
-      .legend-text {{
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 10px;
-        fill: #8b949e;
-      }}
-
-      /* Base cell transformation */
-      .c-cell {{
-        transform-box: fill-box;
-        transform-origin: center;
-        opacity: 0;
-      }}
-
-      /* Diagonal Slant Reveal with Specular White/Cyan Glint Flash */
-      @keyframes slantRevealL0 {{
-        0% {{ opacity: 0; transform: scale(0.2); fill: #ffffff; }}
-        30% {{ opacity: 1; transform: scale(1.25); fill: #ffffff; }}
-        65% {{ fill: #334155; }}
-        100% {{ opacity: 1; transform: scale(1); fill: #161b22; }}
-      }}
-      @keyframes slantRevealL1 {{
-        0% {{ opacity: 0; transform: scale(0.2); fill: #ffffff; }}
-        30% {{ opacity: 1; transform: scale(1.3); fill: #ffffff; }}
-        65% {{ fill: #2dd4bf; }}
-        100% {{ opacity: 1; transform: scale(1); fill: #0e4429; }}
-      }}
-      @keyframes slantRevealL2 {{
-        0% {{ opacity: 0; transform: scale(0.2); fill: #ffffff; }}
-        30% {{ opacity: 1; transform: scale(1.35); fill: #ffffff; }}
-        65% {{ fill: #38bdf8; }}
-        100% {{ opacity: 1; transform: scale(1); fill: #006d32; }}
-      }}
-      @keyframes slantRevealL3 {{
-        0% {{ opacity: 0; transform: scale(0.2); fill: #ffffff; }}
-        30% {{ opacity: 1; transform: scale(1.4); fill: #ffffff; }}
-        65% {{ fill: #86efac; }}
-        100% {{ opacity: 1; transform: scale(1); fill: #26a641; }}
-      }}
-      @keyframes slantRevealL4 {{
-        0% {{ opacity: 0; transform: scale(0.2); fill: #ffffff; }}
-        30% {{ opacity: 1; transform: scale(1.5); fill: #ffffff; }}
-        65% {{ fill: #a7f3d0; }}
-        100% {{ opacity: 1; transform: scale(1); fill: #39d353; }}
-      }}
-    </style>
-  </defs>
-
-  <!-- Card Background -->
-  <rect width="{width}" height="{height}" class="bg-card" />
-
-  <!-- Header Section -->
-  <g transform="translate(24, 28)">
-    <circle cx="4" cy="-2" r="3" fill="#22c55e">
-      <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
-    </circle>
-    <text x="16" y="2" class="title-text">⚡ GitHub Contribution Activity (Live Simulation)</text>
-    <text x="{width - 48}" y="2" text-anchor="end" class="stat-counter">1,480+ Commits &amp; Reviews in Last Year</text>
-  </g>
-
-  <!-- Month Labels -->
-  <g class="axis-label" transform="translate({start_x}, {start_y - 12})">''')
-
-    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    month_step = cols / 12.0
-    for m_idx, m_name in enumerate(months):
-        mx = int(m_idx * month_step * cell_pitch)
-        svg_parts.append(f'    <text x="{mx}">{m_name}</text>')
-    svg_parts.append('  </g>')
-
-    # Day of week labels (Mon, Wed, Fri)
-    svg_parts.append(f'''  <g class="axis-label" transform="translate(26, {start_y + 8})">
-    <text x="0" y="{1 * cell_pitch}">Mon</text>
-    <text x="0" y="{3 * cell_pitch}">Wed</text>
-    <text x="0" y="{5 * cell_pitch}">Fri</text>
-  </g>''')
-
-    # Contribution Grid Cells
-    svg_parts.append('  <!-- Contribution Grid Cells -->\n  <g>')
     for c in range(cols):
         for r in range(rows):
-            lvl = grid_levels[c][r]
-            x = start_x + (c * cell_pitch)
-            y = start_y + (r * cell_pitch)
-            
-            # Diagonal index: sweeps bottom-left to top-right
+            lvl = grid[c][r]
+            x = start_x + (c * cell_pitch_x)
+            y = start_y + (r * cell_pitch_y)
+            color = colors[lvl]
+            flash = flash_colors[lvl]
+
             d = c + (6 - r)
-            delay = round(0.12 + (d * 0.028), 3)
-            
-            anim_name = f"slantRevealL{lvl}"
-            filter_attr = ""
-            if lvl == 3:
-                filter_attr = 'filter="url(#glow-l3)"'
-            elif lvl == 4:
-                filter_attr = 'filter="url(#glow-l4)"'
+            t1 = round((d / float(max_d)) * 0.40, 4)
+            t2 = round(t1 + 0.0120, 4)
+            t3 = round(t1 + 0.0500, 4)
 
-            style_rule = f"animation: {anim_name} 0.55s cubic-bezier(0.16, 1, 0.3, 1) {delay}s forwards;"
-            
-            svg_parts.append(
-                f'    <rect class="c-cell" x="{x:.1f}" y="{y:.1f}" width="{cell_size}" height="{cell_size}" '
-                f'rx="2.5" ry="2.5" {filter_attr} style="{style_rule}" />'
-            )
-    svg_parts.append('  </g>')
+            filter_attr = ' filter="url(#cellglow)"' if lvl >= 3 else ''
 
-    # Legend at bottom right
-    leg_x = width - 180
-    leg_y = height - 20
-    svg_parts.append(f'''  <!-- Legend Section -->
-  <g class="legend-text" transform="translate({leg_x}, {leg_y})">
-    <text x="-8" y="8" text-anchor="end">Less</text>
-    <rect x="0" y="0" width="9" height="9" rx="1.5" fill="{colors[0]}" stroke="#30363d" stroke-width="0.5" />
-    <rect x="13" y="0" width="9" height="9" rx="1.5" fill="{colors[1]}" />
-    <rect x="26" y="0" width="9" height="9" rx="1.5" fill="{colors[2]}" />
-    <rect x="39" y="0" width="9" height="9" rx="1.5" fill="{colors[3]}" filter="url(#glow-l3)" />
-    <rect x="52" y="0" width="9" height="9" rx="1.5" fill="{colors[4]}" filter="url(#glow-l4)" />
-    <text x="68" y="8">More</text>
-  </g>
-</svg>''')
+            if lvl == 0:
+                svg.append(f'<rect id="s{c}_{r}" x="{x}" y="{y}" width="11" height="11" rx="2" fill="{color}" opacity="0">')
+                svg.append(f'<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;{t1:.4f};{t2:.4f};1" dur="7.0s" repeatCount="indefinite"/>')
+                svg.append('</rect>')
+            else:
+                svg.append(f'<rect id="s{c}_{r}" x="{x}" y="{y}" width="11" height="11" rx="2" fill="{color}" opacity="0"{filter_attr}>')
+                svg.append(f'<animate attributeName="opacity" values="0;0;1;1" keyTimes="0;{t1:.4f};{t2:.4f};1" dur="7.0s" repeatCount="indefinite"/>')
+                svg.append(f'<animate attributeName="fill" values="{color};{color};{flash};{color}" keyTimes="0;{t1:.4f};{t2:.4f};{t3:.4f}" dur="7.0s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0.1 0 0.2 1;0.4 0 0.6 1"/>')
+                svg.append('</rect>')
+                # Specular white highlight
+                svg.append(f'<rect x="{x+2}" y="{y+2}" width="4" height="2" rx="1" fill="white" opacity="0" pointer-events="none">')
+                svg.append(f'<animate attributeName="opacity" values="0;0;0.55;0" keyTimes="0;{t1:.4f};{t2:.4f};{t3:.4f}" dur="7.0s" repeatCount="indefinite" calcMode="spline" keySplines="0 0 1 1;0 0 0.3 1;0.5 0 1 1"/>')
+                svg.append('</rect>')
 
+    svg.append('</svg>')
     output_path = os.path.join(OUTPUT_DIR, "github-contribution-animation.svg")
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write("\n".join(svg_parts))
+        f.write("\n".join(svg))
     print(f"Generated: {output_path}")
 
 
@@ -235,349 +132,275 @@ def generate_contribution_svg():
 # 2. GENERATE terminal-card.svg
 # -------------------------------------------------------------------------
 def generate_terminal_card_svg():
-    width = 440
-    height = 420
+    width = 840
+    height = 875
+    W = 100
+    H = 53
 
-    # Fetch avatar image or fallback to sleek geometric portrait
     ascii_rows = []
-    target_w = 42
+
+    # Check for local avatar.png/avatar.jpg or fetch from GitHub
+    local_avatar = None
+    for cand in ["avatar.png", "avatar.jpg", "profile.jpg", "photo.jpg"]:
+        cand_p = os.path.join(OUTPUT_DIR, cand)
+        if os.path.exists(cand_p):
+            local_avatar = cand_p
+            break
+
     try:
-        res = requests.get(AVATAR_URL, timeout=8)
-        if res.status_code == 200 and Image is not None:
-            img = Image.open(io.BytesIO(res.content)).convert("L")
-            # Enhance contrast for sharp ASCII rendering
-            img = ImageEnhance.Contrast(img).enhance(1.65)
-            target_h = int(target_w * (img.height / img.width) * 0.48)
-            img = img.resize((target_w, target_h), Image.Resampling.LANCZOS)
-            chars = " .:-=+*#%@"
-            for y in range(target_h):
-                line = "".join(chars[min(int(img.getpixel((x, y)) / 256 * len(chars)), len(chars) - 1)] for x in range(target_w))
-                # Escape xml characters
-                escaped_line = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-                ascii_rows.append(escaped_line)
+        if local_avatar and Image is not None:
+            img = Image.open(local_avatar).convert("L")
+        elif Image is not None:
+            res = requests.get(AVATAR_URL, timeout=8)
+            if res.status_code == 200:
+                img = Image.open(io.BytesIO(res.content)).convert("L")
+            else:
+                img = None
+        else:
+            img = None
+
+        if img is not None:
+            img = ImageEnhance.Contrast(img).enhance(1.8)
+            img = img.resize((W, H), Image.Resampling.LANCZOS)
+            chars = " .:-=+*sS%#@"
+
+            for y in range(H):
+                row = []
+                ny = (y - (H / 2.0)) / (H / 2.0 * 0.94)
+                for x in range(W):
+                    nx = (x - (W / 2.0)) / (W / 2.0 * 0.94)
+                    dist = math.sqrt(nx * nx + ny * ny)
+                    if dist > 1.04:
+                        row.append('#')
+                    elif dist > 0.98:
+                        row.append('@')
+                    else:
+                        val = img.getpixel((x, y))
+                        char_idx = min(int(val / 256.0 * len(chars)), len(chars) - 1)
+                        row.append(chars[char_idx])
+                row_str = "".join(row).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                ascii_rows.append(row_str)
     except Exception as e:
-        print(f"Avatar fetch warning: {e}. Using fallback art.")
+        print(f"Notice during image conversion: {e}")
 
-    if not ascii_rows:
-        # Fallback cyberpunk developer avatar mask
-        fallback_art = [
-            "               .---.              ",
-            "              /     \\             ",
-            "             | () () |            ",
-            "              \\  _  /             ",
-            "               `---'              ",
-            "            .---------.           ",
-            "           / | FRONT | \\          ",
-            "          |  |  END  |  |         ",
-            "          |  | DEV   |  |         ",
-            "          '--'-------'--'         "
-        ]
-        ascii_rows = [l.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;") for l in fallback_art]
+    # Fallback if image not processed
+    if len(ascii_rows) < H:
+        ascii_rows = []
+        for y in range(H):
+            row = []
+            ny = (y - (H / 2.0)) / (H / 2.0 * 0.94)
+            for x in range(W):
+                nx = (x - (W / 2.0)) / (W / 2.0 * 0.94)
+                dist = math.sqrt(nx * nx + ny * ny)
+                if dist > 1.04:
+                    row.append('#')
+                elif dist > 0.98:
+                    row.append('@')
+                else:
+                    row.append('.' if (x + y) % 2 == 0 else ' ')
+            ascii_rows.append("".join(row))
 
-    # Limit to maximum 19 rows so it fits perfectly in the terminal window
-    ascii_rows = ascii_rows[:19]
+    svg = []
+    svg.append(f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#111722"/>
+    <stop offset="1" stop-color="#0d1117"/>
+  </linearGradient>
+</defs>
+<!-- card background -->
+<rect width="{width}" height="{height}" rx="12" fill="url(#bg)"/>
+<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="none" stroke="#30363d" stroke-width="1"/>
+<!-- title bar separator -->
+<line x1="0" y1="30" x2="{width}" y2="30" stroke="#30363d"/>
+<!-- macOS window buttons -->
+<circle cx="20" cy="15.0" r="5" fill="#ff5f56"/>
+<circle cx="36" cy="15.0" r="5" fill="#ffbd2e"/>
+<circle cx="52" cy="15.0" r="5" fill="#27c93f"/>
+<!-- window title -->
+<text x="420.0" y="19.0" fill="#7d8590" font-size="12" text-anchor="middle">{GITHUB_USERNAME}@github: ~$ ./portrait.sh</text>
+<!-- ASCII art rows -->''')
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="100%" height="{height}">
-  <defs>
-    <!-- Background Gradient -->
-    <linearGradient id="term-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d1117" />
-      <stop offset="60%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#0a0f1d" />
-    </linearGradient>
+    row_dur = 0.11
+    row_height = 15.0
+    start_y = 37.0
 
-    <!-- Text Neon Gradient -->
-    <linearGradient id="ascii-neon" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="50%" stop-color="#818cf8" />
-      <stop offset="100%" stop-color="#34d399" />
-    </linearGradient>
+    for i, row_text in enumerate(ascii_rows):
+        start_time = round(i * row_dur, 3)
+        end_time = round((i + 1) * row_dur, 3)
+        row_y = start_y + (i * row_height)
+        text_y = row_y + 11.1
+        cursor_y = row_y + 1.0
 
-    <style>
-      .term-window {{
-        fill: url(#term-bg);
-        stroke: #30363d;
-        stroke-width: 1.2;
-        rx: 12px;
-      }}
-      .term-title {{
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 11px;
-        fill: #8b949e;
-        font-weight: 500;
-      }}
-      .cmd-prompt {{
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 11px;
-        fill: #94a3b8;
-      }}
-      .ascii-line {{
-        font-family: 'JetBrains Mono', 'Courier New', monospace;
-        font-size: 9.5px;
-        letter-spacing: 1.2px;
-        fill: url(#ascii-neon);
-        opacity: 0;
-        transform: translateY(3px);
-      }}
-      .cursor-block {{
-        fill: #38bdf8;
-      }}
+        svg.append(f'<clipPath id="r{i}"><rect x="20" y="{row_y:.1f}" height="15" width="0"><animate attributeName="width" from="0" to="800" begin="{start_time:.3f}s" dur="{row_dur}s" fill="freeze"/></rect></clipPath>')
+        svg.append(f'<g clip-path="url(#r{i})"><text xml:space="preserve" x="20" y="{text_y:.1f}" fill="#c9d1d9" font-size="12.9" textLength="800" lengthAdjust="spacing">{row_text}</text></g>')
+        svg.append(f'<rect y="{cursor_y:.1f}" width="8" height="13" fill="#c9d1d9" opacity="0"><animate attributeName="x" from="20" to="820" begin="{start_time:.3f}s" dur="{row_dur}s" fill="freeze"/><set attributeName="opacity" to="0.85" begin="{start_time:.3f}s"/><set attributeName="opacity" to="0" begin="{end_time:.3f}s"/></rect>')
 
-      /* Staggered Row Reveal Animation */
-      @keyframes revealRow {{
-        0% {{
-          opacity: 0;
-          transform: translateY(3px);
-        }}
-        100% {{
-          opacity: 1;
-          transform: translateY(0);
-        }}
-      }}
-
-      /* Typewriter prompt at bottom */
-      @keyframes fadeInFooter {{
-        0% {{ opacity: 0; transform: translateY(4px); }}
-        100% {{ opacity: 1; transform: translateY(0); }}
-      }}
-
-      /* Sweeping / Blinking Terminal Cursor */
-      @keyframes blinkCursor {{
-        0%, 45% {{ opacity: 1; }}
-        50%, 95% {{ opacity: 0; }}
-        100% {{ opacity: 1; }}
-      }}
-    </style>
-  </defs>
-
-  <!-- Window Container -->
-  <rect width="{width}" height="{height}" class="term-window" />
-
-  <!-- macOS Window Control Buttons -->
-  <circle cx="22" cy="19" r="5.5" fill="#ef4444" />
-  <circle cx="38" cy="19" r="5.5" fill="#f59e0b" />
-  <circle cx="54" cy="19" r="5.5" fill="#10b981" />
-
-  <!-- Window Title -->
-  <text x="220" y="23" text-anchor="middle" class="term-title">sonu@avatar: ~ (ascii-portrait)</text>
-
-  <!-- Divider Line -->
-  <line x1="0" y1="36" x2="{width}" y2="36" stroke="#21262d" stroke-width="1" />
-
-  <!-- Terminal Command Execution -->
-  <g transform="translate(20, 56)">
-    <text class="cmd-prompt">
-      <tspan fill="#38bdf8">sonu@devbox</tspan><tspan fill="#8b949e">:</tspan><tspan fill="#a855f7">~</tspan><tspan fill="#f1f5f9">$ cat avatar.ascii</tspan>
-    </text>
-  </g>
-
-  <!-- ASCII Art Rows (Revealed Top to Bottom) -->
-  <g transform="translate(20, 72)">'''
-
-    line_spacing = 11.8
-    total_reveal_time = 0.2
-    for i, row in enumerate(ascii_rows):
-        y_pos = (i + 1) * line_spacing
-        delay = round(0.2 + (i * 0.055), 3)
-        style = f"animation: revealRow 0.22s cubic-bezier(0.16, 1, 0.3, 1) {delay}s forwards;"
-        svg += f'\n    <text x="0" y="{y_pos:.1f}" class="ascii-line" style="{style}">{row}</text>'
-        total_reveal_time = delay + 0.22
-
-    whoami_delay = round(total_reveal_time + 0.2, 3)
-    res_delay = round(whoami_delay + 0.3, 3)
-    cursor_delay = round(res_delay + 0.1, 3)
-
-    svg += f'''
-  </g>
-
-  <!-- Footer Typewriter Section ($ whoami -> Sonu Sharma) -->
-  <g transform="translate(20, 335)">
-    <!-- Command Prompt -->
-    <text class="cmd-prompt" style="opacity: 0; animation: fadeInFooter 0.3s ease-out {whoami_delay}s forwards;">
-      <tspan fill="#38bdf8">sonu@devbox</tspan><tspan fill="#8b949e">:</tspan><tspan fill="#a855f7">~</tspan><tspan fill="#f1f5f9">$ whoami</tspan>
-    </text>
-
-    <!-- Response Output -->
-    <g transform="translate(0, 22)" style="opacity: 0; animation: fadeInFooter 0.35s ease-out {res_delay}s forwards;">
-      <text font-family="'JetBrains Mono', monospace" font-size="12" font-weight="600" fill="#22c55e">
-        ➜ Sonu Sharma <tspan fill="#38bdf8" font-size="11" font-weight="500">[Frontend Engineer &amp; UI/UX]</tspan>
-      </text>
-    </g>
-
-    <g transform="translate(0, 42)" style="opacity: 0; animation: fadeInFooter 0.35s ease-out {res_delay + 0.15:.2f}s forwards;">
-      <text font-family="'JetBrains Mono', monospace" font-size="10.5" fill="#94a3b8">
-        ⚡ Obsessed with 60fps micro-interactions &amp; testability.
-      </text>
-      <!-- Blinking Cursor Block -->
-      <rect x="355" y="-10" width="7" height="13" class="cursor-block" style="animation: blinkCursor 0.9s step-end infinite; animation-delay: {cursor_delay}s;" />
-    </g>
-  </g>
-</svg>'''
+    svg.append(f'''<!-- footer separator -->
+<line x1="0" y1="832.0" x2="{width}" y2="832.0" stroke="#30363d"/>
+<!-- whoami line -->
+<text x="20" y="851.0" fill="#7d8590" font-size="13">{GITHUB_USERNAME}@github:~$ whoami <tspan fill="#c9d1d9">{FULL_NAME}</tspan></text>
+<!-- blinking cursor -->
+<rect x="280" y="838.0" width="8" height="14" fill="#c9d1d9">
+  <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.51;1" dur="1s" repeatCount="indefinite"/>
+</rect>
+</svg>''')
 
     output_path = os.path.join(OUTPUT_DIR, "terminal-card.svg")
     with open(output_path, "w", encoding="utf-8") as f:
-        f.write(svg)
+        f.write("\n".join(svg))
     print(f"Generated: {output_path}")
 
 
 # -------------------------------------------------------------------------
-# 3. GENERATE info-card.svg (Neofetch Info Card)
+# 3. GENERATE info-card.svg
 # -------------------------------------------------------------------------
 def generate_info_card_svg():
-    width = 440
-    height = 420
+    width = 480
+    height = 460
 
-    lines = [
-        ("HEADER", "sonu@devbox"),
-        ("SEP", "--------------------------------------"),
-        ("OS", "OS", "GitHub / Arch Linux (Rolling)", "#f97316", "#e2e8f0"),
-        ("HOST", "Host", "Sunway CS / Kathmandu, NP", "#f97316", "#e2e8f0"),
-        ("KERNEL", "Kernel", "React 19 / TypeScript 5.8 (Strict)", "#38bdf8", "#e2e8f0"),
-        ("ROLE", "Role", "Frontend Engineer & Creative Dev", "#22c55e", "#f1f5f9"),
-        ("UPTIME", "Uptime", "5+ Years in Software Engineering", "#a855f7", "#e2e8f0"),
-        ("SHELL", "Shell", "zsh 5.9 (spaceship-prompt & starship)", "#f97316", "#e2e8f0"),
-        ("STACK", "Stack", "React • TypeScript • Tailwind • GSAP", "#38bdf8", "#38bdf8"),
-        ("QUALITY", "Quality", "Playwright • Pytest • Selenium (POM)", "#22c55e", "#4ade80"),
-        ("MISSION", "Mission", "\"Zero Bugs, 60fps, Pure Delight\"", "#a855f7", "#c084fc"),
-        ("MEMORY", "Memory", "99.4% Caffeine / 0.6% Sleep", "#f97316", "#e2e8f0"),
-        ("PORTFOLIO", "Portfolio", "https://sonusharma.com.np", "#38bdf8", "#38bdf8"),
-    ]
+    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+<defs>
+  <linearGradient id="ibg" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#111722"/>
+    <stop offset="1" stop-color="#0d1117"/>
+  </linearGradient>
+</defs>
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="100%" height="{height}">
-  <defs>
-    <!-- Card Gradient -->
-    <linearGradient id="info-bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d1117" />
-      <stop offset="60%" stop-color="#111827" />
-      <stop offset="100%" stop-color="#0a0f1d" />
-    </linearGradient>
+<!-- card background -->
+<rect width="{width}" height="{height}" rx="12" fill="url(#ibg)"/>
+<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="12" fill="none" stroke="#30363d"/>
 
-    <style>
-      .info-window {{
-        fill: url(#info-bg);
-        stroke: #30363d;
-        stroke-width: 1.2;
-        rx: 12px;
-      }}
-      .info-title {{
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 11px;
-        fill: #8b949e;
-        font-weight: 500;
-      }}
-      .term-line {{
-        font-family: 'JetBrains Mono', 'Fira Code', -apple-system, monospace;
-        font-size: 11.5px;
-        opacity: 0;
-        transform: translateY(8px);
-      }}
+<!-- title bar -->
+<line x1="0" y1="30" x2="{width}" y2="30" stroke="#30363d"/>
+<circle cx="20" cy="15.0" r="5" fill="#ff5f56"/>
+<circle cx="36" cy="15.0" r="5" fill="#ffbd2e"/>
+<circle cx="52" cy="15.0" r="5" fill="#27c93f"/>
+<text x="240" y="19" fill="#7d8590" font-size="12" text-anchor="middle">{GITHUB_USERNAME}@github: ~$ neofetch</text>
 
-      /* Staggered slide up and fade in for terminal neofetch lines */
-      @keyframes slideInLine {{
-        0% {{
-          opacity: 0;
-          transform: translateY(8px);
-        }}
-        100% {{
-          opacity: 1;
-          transform: translateY(0);
-        }}
-      }}
+<!-- ── ROW 0: identity header ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="60" font-size="14" font-weight="700">
+    <tspan fill="#3fb950">{GITHUB_USERNAME}</tspan>
+    <tspan fill="#7d8590">@</tspan>
+    <tspan fill="#22d3ee">github</tspan>
+  </text>
+  <line x1="160" y1="56" x2="460" y2="56" stroke="#30363d" stroke-opacity="0.8"/>
+  <animate attributeName="opacity" from="0" to="1" begin="0.15s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.15s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-      .color-block {{
-        opacity: 0;
-        transform: scale(0.8);
-        transform-box: fill-box;
-        transform-origin: center;
-      }}
-      @keyframes popColorBlock {{
-        0% {{ opacity: 0; transform: scale(0.6); }}
-        100% {{ opacity: 1; transform: scale(1); }}
-      }}
-    </style>
-  </defs>
+<!-- ── ROW 2: Role ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="104" fill="#ffa657" font-size="12.5" font-weight="700">Role</text>
+  <text x="112" y="104" fill="#c9d1d9" font-size="12.5">Frontend Engineer</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.27s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.27s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-  <!-- Window Container -->
-  <rect width="{width}" height="{height}" class="info-window" />
+<!-- ── ROW 3: Focus ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="125" fill="#ffa657" font-size="12.5" font-weight="700">Focus</text>
+  <text x="112" y="125" fill="#c9d1d9" font-size="12.5">React, TypeScript &amp; UI/UX Motion</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.33s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.33s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-  <!-- macOS Window Control Buttons -->
-  <circle cx="22" cy="19" r="5.5" fill="#ef4444" />
-  <circle cx="38" cy="19" r="5.5" fill="#f59e0b" />
-  <circle cx="54" cy="19" r="5.5" fill="#10b981" />
+<!-- ── ROW 4: College ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="146" fill="#ffa657" font-size="12.5" font-weight="700">College</text>
+  <text x="112" y="146" fill="#c9d1d9" font-size="12.5">BSc (Hons) CS, Sunway Int'l Business School</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.39s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.39s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-  <!-- Window Title -->
-  <text x="220" y="23" text-anchor="middle" class="info-title">sonu@system: ~ (neofetch)</text>
+<!-- ── SECTION: Stack ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="177" fill="#58a6ff" font-size="12.5" font-weight="700">&#8212; Stack</text>
+  <line x1="72" y1="173" x2="460" y2="173" stroke="#30363d" stroke-opacity="0.8"/>
+  <animate attributeName="opacity" from="0" to="1" begin="0.51s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.51s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-  <!-- Divider Line -->
-  <line x1="0" y1="36" x2="{width}" y2="36" stroke="#21262d" stroke-width="1" />
+<!-- ── ROW: Frontend ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="198" fill="#ffa657" font-size="12.5" font-weight="700">Frontend</text>
+  <text x="112" y="198" fill="#c9d1d9" font-size="12.5">React, Next.js, TypeScript, Tailwind</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.57s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.57s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-  <!-- Content Rows -->
-  <g transform="translate(24, 60)">'''
+<!-- ── ROW: Motion ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="219" fill="#ffa657" font-size="12.5" font-weight="700">Motion</text>
+  <text x="112" y="219" fill="#c9d1d9" font-size="12.5">GSAP Animations, Framer Motion</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.63s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.63s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-    y_offset = 0
-    line_gap = 21
-    current_time = 0.15
+<!-- ── ROW: Testing ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="240" fill="#ffa657" font-size="12.5" font-weight="700">Testing</text>
+  <text x="112" y="240" fill="#c9d1d9" font-size="12.5">Playwright, Pytest, Selenium (POM)</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.69s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.69s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-    for item in lines:
-        kind = item[0]
-        delay = round(current_time, 3)
-        style = f"animation: slideInLine 0.3s cubic-bezier(0.16, 1, 0.3, 1) {delay}s forwards;"
+<!-- ── ROW: Cloud & Tools ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="261" fill="#ffa657" font-size="12.5" font-weight="700">Tools</text>
+  <text x="112" y="261" fill="#c9d1d9" font-size="12.5">Git, GitHub Actions, Vite, Vercel</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.75s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.75s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-        if kind == "HEADER":
-            svg += f'''
-    <g class="term-line" style="{style}" transform="translate(0, {y_offset})">
-      <text font-weight="700" font-size="13" fill="#38bdf8">{item[1]}</text>
-    </g>'''
-            y_offset += 16
-        elif kind == "SEP":
-            svg += f'''
-    <g class="term-line" style="{style}" transform="translate(0, {y_offset})">
-      <text fill="#475569">{item[1]}</text>
-    </g>'''
-            y_offset += 20
-        else:
-            _, label, val, l_col, v_col = item
-            svg += f'''
-    <g class="term-line" style="{style}" transform="translate(0, {y_offset})">
-      <text>
-        <tspan fill="{l_col}" font-weight="600">{label}: </tspan>
-        <tspan fill="{v_col}">{val}</tspan>
-      </text>
-    </g>'''
-            y_offset += line_gap
+<!-- ── ROW: Languages ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="282" fill="#ffa657" font-size="12.5" font-weight="700">Languages</text>
+  <text x="112" y="282" fill="#c9d1d9" font-size="12.5">TypeScript, JavaScript, Python, C</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.81s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.81s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-        current_time += 0.06
+<!-- ── SECTION: Highlights ── -->
+<g opacity="0" transform="translate(0,5)">
+  <text x="20" y="313" fill="#58a6ff" font-size="12.5" font-weight="700">&#8212; Highlights</text>
+  <line x1="112" y1="309" x2="460" y2="309" stroke="#30363d" stroke-opacity="0.8"/>
+  <animate attributeName="opacity" from="0" to="1" begin="0.87s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.87s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-    # Neofetch 8-color test palette strip at bottom
-    palette_colors_dark = ["#1e293b", "#ef4444", "#22c55e", "#eab308", "#3b82f6", "#a855f7", "#06b6d4", "#f8fafc"]
-    palette_colors_light = ["#475569", "#f87171", "#4ade80", "#fde047", "#60a5fa", "#c084fc", "#22d3ee", "#ffffff"]
+<!-- ── BULLET 1 ── -->
+<g opacity="0" transform="translate(0,5)">
+  <circle cx="23" cy="329" r="2.5" fill="#3fb950"/>
+  <text x="34" y="333" fill="#c9d1d9" font-size="12.5">Live Superhero Portfolio @ sonusharma.com.np</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.93s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.93s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-    block_w = 21
-    block_h = 11
-    block_spacing = 26
-    strip_y = 350
-    strip_delay = round(current_time + 0.1, 3)
+<!-- ── BULLET 2 ── -->
+<g opacity="0" transform="translate(0,5)">
+  <circle cx="23" cy="354" r="2.5" fill="#3fb950"/>
+  <text x="34" y="358" fill="#c9d1d9" font-size="12.5">Engineered 60fps Spotlight Masking &amp; 3D Marquees</text>
+  <animate attributeName="opacity" from="0" to="1" begin="0.99s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="0.99s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-    svg += f'''
-  </g>
+<!-- ── BULLET 3 ── -->
+<g opacity="0" transform="translate(0,5)">
+  <circle cx="23" cy="379" r="2.5" fill="#3fb950"/>
+  <text x="34" y="383" fill="#c9d1d9" font-size="12.5">Enterprise E2E Page Object Model Automation Suites</text>
+  <animate attributeName="opacity" from="0" to="1" begin="1.05s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="1.05s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 
-  <!-- Neofetch Color Test Bars -->
-  <g transform="translate(24, {strip_y})">'''
-
-    for idx, c in enumerate(palette_colors_dark):
-        b_x = idx * block_spacing
-        b_delay = round(strip_delay + (idx * 0.03), 3)
-        b_style = f"animation: popColorBlock 0.25s ease-out {b_delay}s forwards;"
-        svg += f'\n    <rect class="color-block" x="{b_x}" y="0" width="{block_w}" height="{block_h}" rx="2" fill="{c}" style="{b_style}" />'
-
-    for idx, c in enumerate(palette_colors_light):
-        b_x = idx * block_spacing
-        b_delay = round(strip_delay + 0.2 + (idx * 0.03), 3)
-        b_style = f"animation: popColorBlock 0.25s ease-out {b_delay}s forwards;"
-        svg += f'\n    <rect class="color-block" x="{b_x}" y="15" width="{block_w}" height="{block_h}" rx="2" fill="{c}" style="{b_style}" />'
-
-    svg += '''
-  </g>
+<!-- ── BULLET 4 ── -->
+<g opacity="0" transform="translate(0,5)">
+  <circle cx="23" cy="404" r="2.5" fill="#3fb950"/>
+  <text x="34" y="408" fill="#c9d1d9" font-size="12.5">5+ Years Building Robust, Zero-Regression Web Architectures</text>
+  <animate attributeName="opacity" from="0" to="1" begin="1.11s" dur="0.4s" fill="freeze"/>
+  <animateTransform attributeName="transform" type="translate" from="0 5" to="0 0" begin="1.11s" dur="0.4s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/>
+</g>
 </svg>'''
 
     output_path = os.path.join(OUTPUT_DIR, "info-card.svg")
@@ -587,68 +410,44 @@ def generate_info_card_svg():
 
 
 # -------------------------------------------------------------------------
-# 4. INJECT INTO README.md
+# 4. INJECT INTO README.md (EXACT VIRAL LAYOUT)
 # -------------------------------------------------------------------------
 def inject_into_readme():
     readme_path = os.path.join(OUTPUT_DIR, "README.md")
-    clean_readme = """<div align="center">
-  <!-- Sleek Dark Minimalist & Neon Cyberpunk Waving Header -->
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:#030712,35:#0f172a,70:#3b82f6,100:#8b5cf6&height=210&section=header&text=SONU%20SHARMA%20⚡&fontSize=38&fontAlignY=36&desc=FRONTEND%20ENGINEER%20%7C%20REACT%20%26%20TYPESCRIPT%20%7C%20UI%2FUX%20ANIMATIONS&descAlignY=62&descAlign=50&fontColor=38bdf8" width="100%"/>
+    content = f'''<p align="center">
+  <img src="github-contribution-animation.svg" alt="GitHub Contribution Graph" width="850"/>
+</p>
 
-  <!-- Badges & Quick Links -->
-  <a href="https://sonusharma.com.np">
-    <img src="https://img.shields.io/badge/🌐_Portfolio-sonusharma.com.np-38BDF8?style=for-the-badge&logo=googlechrome&logoColor=030712" />
-  </a>
-  &nbsp;
-  <a href="mailto:sonushar059@gmail.com">
-    <img src="https://img.shields.io/badge/✉️_Email-sonushar059%40gmail.com-818CF8?style=for-the-badge&logo=gmail&logoColor=030712" />
-  </a>
-  &nbsp;
-  <a href="https://github.com/SonuSharma2">
-    <img src="https://img.shields.io/badge/🐙_GitHub-SonuSharma2-A855F7?style=for-the-badge&logo=github&logoColor=ffffff" />
-  </a>
-  &nbsp;
-  <img src="https://komarev.com/ghpvc/?username=SonuSharma2&label=Profile%20Views&color=38bdf8&style=for-the-badge" alt="Profile Views" />
-</div>
+<table>
+  <tr>
+    <td valign="centre"><img src="terminal-card.svg" alt="ASCII Portrait" width="400"/></td>
+    <td valign="top"><img src="info-card.svg" alt="Info Card" width="500"/></td>
+  </tr>
+</table>
 
-<br/>
-
-<!-- ======================================================== -->
-<!-- DYNAMIC CYBERPUNK TERMINAL & CONTRIBUTION SECTION -->
-<!-- ======================================================== -->
+<!-- HERO SECTION -->
 <div align="center">
-  <table border="0" cellspacing="0" cellpadding="0" style="border: none; border-collapse: collapse; background: transparent; width: 100%;">
-    <tr>
-      <td width="50%" align="center" valign="top" style="border: none; padding: 6px;">
-        <img src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/main/terminal-card.svg" width="100%" alt="Sonu's ASCII Portrait Terminal" />
-      </td>
-      <td width="50%" align="center" valign="top" style="border: none; padding: 6px;">
-        <img src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/main/info-card.svg" width="100%" alt="Sonu's Neofetch System Info" />
-      </td>
-    </tr>
-  </table>
-  <br/>
-  <img src="https://raw.githubusercontent.com/SonuSharma2/SonuSharma2/main/github-contribution-animation.svg" width="100%" alt="Sonu's GitHub Contribution Activity" />
-</div>
-<!-- ======================================================== -->
+  <h3><strong>Frontend Engineer | React &amp; TypeScript | UI/UX &amp; Motion Specialist</strong></h3>
+  <p><i>Building modern web applications, scalable architectures, and 60fps delightful micro-interactions.</i></p>
 
-<br/>
-
-<div align="center">
-  <!-- Sleek Cyberpunk Gradient Footer -->
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0:#8b5cf6,30:#3b82f6,70:#0f172a,100:#030712&height=90&section=footer" width="100%"/>
+  <p>
+    <a href="https://sonusharma.com.np"><img src="https://img.shields.io/badge/Portfolio-sonusharma.com.np-38BDF8?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" /></a>
+    <a href="mailto:sonushar059@gmail.com"><img src="https://img.shields.io/badge/Email-sonushar059%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" /></a>
+    <a href="https://github.com/{GITHUB_USERNAME}"><img src="https://img.shields.io/badge/GitHub-{GITHUB_USERNAME}-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+  </p>
+  
+  <img src="https://komarev.com/ghpvc/?username={GITHUB_USERNAME}&color=00FFCC&style=flat-square" alt="Visitor Counter" />
 </div>
-"""
+'''
     with open(readme_path, "w", encoding="utf-8") as f:
-        f.write(clean_readme)
-    print("Updated README.md with pristine layout!")
+        f.write(content)
+    print("Updated README.md with exact viral layout!")
 
 
 # -------------------------------------------------------------------------
 # MAIN
 # -------------------------------------------------------------------------
 if __name__ == "__main__":
-    print("Generating animated SVGs...")
     generate_contribution_svg()
     generate_terminal_card_svg()
     generate_info_card_svg()
